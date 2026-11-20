@@ -13,7 +13,7 @@ RUN useradd --create-home --shell /bin/bash --groups wheel railway && \
     chmod 0440 /etc/sudoers.d/railway
 
 USER railway
-WORKDIR /home/railway
+RUN mkdir ~/projects
 
 RUN echo 'export PS1="\u@\${RAILWAY_SERVICE_NAME:-\$HOSTNAME} \w \$ "' \
     > /home/railway/.bashrc
@@ -21,4 +21,4 @@ RUN echo 'export PS1="\u@\${RAILWAY_SERVICE_NAME:-\$HOSTNAME} \w \$ "' \
 # Railway sets PORT; default to 8080 for local podman testing
 ENV PORT=8080
 
-CMD ["sh", "-c", "exec code-server --bind-addr 0.0.0.0:${PORT} --auth password --disable-telemetry /home/railway"]
+CMD ["sh", "-c", "exec code-server --bind-addr 0.0.0.0:${PORT} --auth password --disable-telemetry /home/railway/projects"]
