@@ -13,8 +13,6 @@ RUN useradd --create-home --shell /bin/bash --groups wheel railway && \
     printf 'railway ALL=(ALL) NOPASSWD:ALL\n' > /etc/sudoers.d/railway && \
     chmod 0440 /etc/sudoers.d/railway
 
-RUN echo "127.0.1.1 code-server" >> /etc/hosts
-
 USER railway
 WORKDIR /home/railway
 
