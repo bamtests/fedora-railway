@@ -1,8 +1,11 @@
 FROM registry.fedoraproject.org/fedora:45
 
-RUN dnf -y install curl && \
-    curl -fsSL https://code-server.dev/install.sh | sh && \
-    dnf clean all
+ARG CODE_SERVER_VERSION=4.146.0
+
+RUN dnf -y install curl \
+    && curl -fOL https://github.com/coder/code-server/releases/download/v${CODE_SERVER_VERSION}/code-server-${CODE_SERVER_VERSION}-amd64.rpm \
+    && rpm -i code-server-$VERSION-amd64.rpm \
+    && dnf clean all
 
 # User with passwordless sudo
 RUN useradd --create-home --shell /bin/bash --groups wheel railway && \
