@@ -1,7 +1,7 @@
 FROM registry.fedoraproject.org/fedora:45
 
 RUN dnf -y install curl && \
-    curl -fsSL https://code-server.dev/install.sh | sh -s -- && \
+    curl -fsSL https://code-server.dev/install.sh | sh && \
     dnf clean all
 
 # User with passwordless sudo
