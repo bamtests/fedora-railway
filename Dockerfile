@@ -4,7 +4,7 @@ ARG CODE_SERVER_VERSION=4.146.0
 
 RUN dnf -y install curl \
     && curl -fOL https://github.com/coder/code-server/releases/download/v${CODE_SERVER_VERSION}/code-server-${CODE_SERVER_VERSION}-amd64.rpm \
-    && rpm -i code-server-$VERSION-amd64.rpm \
+    && rpm -i code-server-${CODE_SERVER_VERSION}-amd64.rpm \
     && dnf clean all
 
 # User with passwordless sudo
