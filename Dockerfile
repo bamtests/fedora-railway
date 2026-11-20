@@ -1,6 +1,6 @@
 FROM registry.fedoraproject.org/fedora:45
 
-RUN dnf -y install curl \
+RUN dnf -y install curl fish \
     && CODE_SERVER_VERSION=$(curl -fsSL https://api.github.com/repos/coder/code-server/releases/latest | grep -Po '"tag_name":\s*"v\K[^"]*') \
     && curl -fOL https://github.com/coder/code-server/releases/download/v${CODE_SERVER_VERSION}/code-server-${CODE_SERVER_VERSION}-amd64.rpm \
     && dnf install -y code-server-${CODE_SERVER_VERSION}-amd64.rpm \
@@ -8,7 +8,7 @@ RUN dnf -y install curl \
     && dnf clean all
 
 # User with passwordless sudo
-RUN useradd --create-home --shell /bin/bash --groups wheel railway && \
+RUN useradd --create-home --shell /usr/bin/fish --groups wheel railway && \
     printf 'railway ALL=(ALL) NOPASSWD:ALL\n' > /etc/sudoers.d/railway && \
     chmod 0440 /etc/sudoers.d/railway
 
